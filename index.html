@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Profile Forge · Ultimate Edition</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Font (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- html2canvas for PNG export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <span class="brand"><i class="fas fa-code" style="color:var(--accent);"></i> Profile Forge</span>
+            <div class="actions">
+                <button id="themeToggle"><i class="fas fa-moon"></i> <span>Dark</span></button>
+                <button id="exportMarkdownBtn"><i class="fas fa-file-alt"></i> Markdown</button>
+                <button id="exportPNGBtn"><i class="fas fa-image"></i> PNG</button>
+                <button id="shareBtn" class="primary"><i class="fas fa-share-alt"></i> Share</button>
+            </div>
+        </div>
+
+        <!-- Main Card -->
+        <div class="card" id="dashboardCard">
+            <!-- Search -->
+            <div class="search-section">
+                <input type="text" id="usernameInput" placeholder="Enter GitHub username..." value="octocat">
+                <button id="fetchBtn"><i class="fas fa-rocket"></i> Generate Dashboard</button>
+            </div>
+
+            <!-- Error -->
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText">User not found. Please try again.</span>
+            </div>
+
+            <!-- Profile -->
+            <div class="profile-header" id="profileHeader">
+                <div class="avatar" id="avatarContainer"><i class="fas fa-user"></i></div>
+                <div class="title-group">
+                    <h1 id="profileName">GitHub User</h1>
+                    <span class="badge" id="profileBadge">PRO</span>
+                    <div class="bio" id="profileBio"><i class="fas fa-quote-left"></i><span>Loading profile...</span></div>
+                    <div class="meta-links">
+                        <a href="#" id="profileLink"><i class="fab fa-github"></i> github.com/</a>
+                        <a href="#" id="followersLink"><i class="fas fa-users"></i> 0 followers</a>
+                        <a href="#" id="starsLink"><i class="fas fa-star"></i> 0 stars</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Grid (Draggable) -->
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card" data-id="forks">
+                    <div class="drag-handle"><i class="fas fa-grip-vertical"></i></div>
+                    <div class="icon"><i class="fas fa-code-fork"></i></div>
+                    <div class="number" id="statForks">-</div>
+                    <div class="label">Total Forks</div>
+                </div>
+                <div class="stat-card" data-id="stars">
+                    <div class="drag-handle"><i class="fas fa-grip-vertical"></i></div>
+                    <div class="icon"><i class="fas fa-star"></i></div>
+                    <div class="number" id="statStars">-</div>
+                    <div class="label">Stars Earned</div>
+                </div>
+                <div class="stat-card" data-id="prs">
+                    <div class="drag-handle"><i class="fas fa-grip-vertical"></i></div>
+                    <div class="icon"><i class="fas fa-pull-request"></i></div>
+                    <div class="number" id="statPRs">-</div>
+                    <div class="label">PRs Merged</div>
+                </div>
+                <div class="stat-card" data-id="repos">
+                    <div class="drag-handle"><i class="fas fa-grip-vertical"></i></div>
+                    <div class="icon"><i class="fas fa-folder-open"></i></div>
+                    <div class="number" id="statRepos">-</div>
+                    <div class="label">Repositories</div>
+                </div>
+                <div class="stat-card" data-id="contributors">
+                    <div class="drag-handle"><i class="fas fa-grip-vertical"></i></div>
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <div class="number" id="statContributors">-</div>
+                    <div class="label">Contributors</div>
+                </div>
+                <div class="stat-card" data-id="commits">
+                    <div class="drag-handle"><i class="fas fa-grip-vertical"></i></div>
+                    <div class="icon"><i class="fas fa-clock"></i></div>
+                    <div class="number" id="statCommits">-</div>
+                    <div class="label">Commits (2025)</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-row">
+                <div class="chart-box">
+                    <h3><i class="fas fa-chart-pie" style="color:var(--accent);"></i> Language Distribution</h3>
+                    <canvas id="langChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3><i class="fas fa-calendar-alt" style="color:var(--accent);"></i> Contribution Heatmap</h3>
+                    <canvas id="heatmapChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3><i class="fas fa-code" style="color:var(--accent);"></i> Code Frequency</h3>
+                    <canvas id="frequencyChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Pinned Repositories -->
+            <div class="pinned-repos">
+                <h3><i class="fas fa-thumbtack" style="color:var(--accent);"></i> Pinned Repositories</h3>
+                <div class="repo-grid" id="repoGrid">
+                    <div style="text-align:center; color:var(--text-secondary); padding:2rem;">Loading pinned repos...</div>
+                </div>
+            </div>
+
+            <!-- Wakatime Section -->
+            <div class="wakatime-section">
+                <h3><i class="fas fa-clock" style="color:var(--accent-orange);"></i> Wakatime Coding Activity</h3>
+                <div class="wakatime-grid" id="wakatimeGrid">
+                    <div class="wakatime-item">
+                        <div class="value" id="wakaHours">--</div>
+                        <div class="label">Hours Coded</div>
+                    </div>
+                    <div class="wakatime-item">
+                        <div class="value" id="wakaProjects">--</div>
+                        <div class="label">Projects</div>
+                    </div>
+                    <div class="wakatime-item">
+                        <div class="value" id="wakaLanguages">--</div>
+                        <div class="label">Languages Used</div>
+                    </div>
+                    <div class="wakatime-item">
+                        <div class="value" id="wakaAvg">--</div>
+                        <div class="label">Avg Daily Hours</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Feed -->
+            <div class="activity-feed">
+                <h3><i class="fas fa-rss" style="color:var(--accent);"></i> Recent Activity</h3>
+                <div class="feed-list" id="feedList">
+                    <div class="feed-item">
+                        <span class="feed-icon"><i class="fas fa-spinner fa-spin"></i></span>
+                        <span class="feed-text">Loading recent activity...</span>
+                        <span class="feed-time">just now</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer-actions">
+                <div class="contrib-badge">
+                    <span><i class="fas fa-handshake"></i> Code of Conduct v1.4</span>
+                    <span><i class="fas fa-balance-scale"></i> Apache 2.0</span>
+                    <span><i class="fas fa-user-plus"></i> <span id="openIssues">0</span> open issues</span>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="contributeBtn"><i class="fas fa-code-branch"></i> Contribute</button>
+                    <button class="btn btn-outline" id="licenseBtn"><i class="fas fa-book-open"></i> License</button>
+                    <button class="btn btn-outline" id="inviteBtn"><i class="fas fa-envelope"></i> Invite</button>
+                </div>
+            </div>
+
+            <div class="license-note">
+                <i class="fas fa-lock" style="margin-right:6px; opacity:0.6;"></i>
+                Licensed under <a href="#">Apache License 2.0</a> ·
+                <a href="#">Contributor Covenant Code of Conduct</a> ·
+                <i class="fas fa-users" style="margin-left:8px; opacity:0.6;"></i>
+                <a href="#">We welcome contributors</a> ·
+                <span style="opacity:0.6;">v3.1.0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal-overlay" id="shareModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-share-alt" style="color:var(--accent);"></i> Share Your Profile</h2>
+            <p style="color:var(--text-secondary); margin-bottom:1rem;">Share your GitHub developer dashboard with the world!</p>
+            <div class="share-buttons">
+                <button style="background:#1da1f2;" onclick="shareOn('twitter')"><i class="fab fa-twitter"></i> Twitter</button>
+                <button style="background:#0a66c2;" onclick="shareOn('linkedin')"><i class="fab fa-linkedin-in"></i> LinkedIn</button>
+                <button style="background:#25d366;" onclick="shareOn('whatsapp')"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                <button style="background:#ff4500;" onclick="shareOn('reddit')"><i class="fab fa-reddit-alien"></i> Reddit</button>
+            </div>
+            <button class="close-modal" id="closeModal">Close</button>
+        </div>
+    </div>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
