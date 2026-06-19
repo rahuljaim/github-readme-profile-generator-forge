@@ -19,16 +19,39 @@
 </head>
 <body>
     <div class="container">
-        <!-- Top Bar -->
-        <div class="top-bar">
-            <span class="brand"><i class="fas fa-code" style="color:var(--accent);"></i> Profile Forge</span>
-            <div class="actions">
-                <button id="themeToggle"><i class="fas fa-moon"></i> <span>Dark</span></button>
-                <button id="exportMarkdownBtn"><i class="fas fa-file-alt"></i> Markdown</button>
-                <button id="exportPNGBtn"><i class="fas fa-image"></i> PNG</button>
-                <button id="shareBtn" class="primary"><i class="fas fa-share-alt"></i> Share</button>
-            </div>
-        </div>
+<!-- Top Bar -->
+<div class="top-bar">
+    <div class="brand">
+        <i class="fas fa-code" style="color:var(--accent);"></i> Profile Forge
+    </div>
+    <div class="actions">
+        <!-- Animated Star & Fork Promo -->
+        <button class="promo-btn" id="starPromoBtn" onclick="window.open('https://github.com/rahuljaim/github-readme-profile-generator-forge', '_blank')">
+            <span class="promo-icon">
+                <i class="fas fa-star fa-beat-fade" style="--fa-beat-fade-opacity: 0.6; --fa-beat-fade-scale: 0.8; color: #f1c40f;"></i>
+            </span>
+            <span class="promo-text">
+                <span class="promo-count" id="starCount">0</span>
+                <span class="promo-label">Star</span>
+            </span>
+        </button>
+        
+        <button class="promo-btn" id="forkPromoBtn" onclick="window.open('https://github.com/rahuljaim/github-readme-profile-generator-forge/fork', '_blank')">
+            <span class="promo-icon">
+                <i class="fas fa-code-fork fa-beat-fade" style="--fa-beat-fade-opacity: 0.6; --fa-beat-fade-scale: 0.8; color: #58a6ff;"></i>
+            </span>
+            <span class="promo-text">
+                <span class="promo-count" id="forkCount">0</span>
+                <span class="promo-label">Fork</span>
+            </span>
+        </button>
+        
+        <button id="themeToggle"><i class="fas fa-moon"></i> <span>Dark</span></button>
+        <button id="exportMarkdownBtn"><i class="fas fa-file-alt"></i> Markdown</button>
+        <button id="exportPNGBtn"><i class="fas fa-image"></i> PNG</button>
+        <button id="shareBtn" class="primary"><i class="fas fa-share-alt"></i> Share</button>
+    </div>
+</div>
 
         <!-- Main Card -->
         <div class="card" id="dashboardCard">

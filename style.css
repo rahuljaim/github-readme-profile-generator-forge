@@ -107,6 +107,145 @@ body {
     box-shadow: 0 8px 20px rgba(46, 160, 67, 0.3);
 }
 
+/* Promo Buttons - Star & Fork */
+.promo-btn {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 0.4rem 1rem 0.4rem 0.6rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-btn:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(88, 166, 255, 0.15);
+}
+
+.promo-btn .promo-icon {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--bg-card);
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.promo-btn:hover .promo-icon {
+    background: var(--border-color);
+}
+
+.promo-btn .promo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+    font-size: 0.7rem;
+}
+
+.promo-btn .promo-count {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+.promo-btn .promo-label {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+}
+
+/* Pulse animation for promo buttons */
+.promo-btn::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 30px;
+    background: linear-gradient(45deg, var(--accent), #f1c40f, var(--accent));
+    background-size: 300% 300%;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+}
+
+.promo-btn:hover::after {
+    opacity: 1;
+    animation: gradientMove 3s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .promo-btn .promo-label {
+        display: none;
+    }
+    .promo-btn .promo-text {
+        font-size: 0.65rem;
+    }
+    .promo-btn {
+        padding: 0.3rem 0.6rem 0.3rem 0.4rem;
+    }
+    .promo-btn .promo-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Confetti/celebration animation for star/fork */
+@keyframes celebrate {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(0.95); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.promo-btn.celebrate {
+    animation: celebrate 0.5s ease;
+}
+
+/* Tooltip for promo buttons */
+.promo-btn .tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    white-space: nowrap;
+    border: 1px solid var(--border-color);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.promo-btn:hover .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+}
+
 /* Main Card */
 .card {
     background: var(--bg-secondary);
