@@ -1,4 +1,4 @@
-/* style.css - Complete extracted styles */
+/* style.css - Complete with all enhancements */
 
 * {
     margin: 0;
@@ -74,6 +74,8 @@ body {
     display: flex;
     gap: 0.6rem;
     flex-wrap: wrap;
+    align-items: center;
+    position: relative;
 }
 
 .top-bar .actions button {
@@ -167,7 +169,29 @@ body {
     opacity: 0.7;
 }
 
-/* Pulse animation for promo buttons */
+.promo-btn .tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    white-space: nowrap;
+    border: 1px solid var(--border-color);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.promo-btn:hover .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+}
+
 .promo-btn::after {
     content: '';
     position: absolute;
@@ -191,25 +215,6 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .promo-btn .promo-label {
-        display: none;
-    }
-    .promo-btn .promo-text {
-        font-size: 0.65rem;
-    }
-    .promo-btn {
-        padding: 0.3rem 0.6rem 0.3rem 0.4rem;
-    }
-    .promo-btn .promo-icon {
-        width: 24px;
-        height: 24px;
-        font-size: 0.9rem;
-    }
-}
-
-/* Confetti/celebration animation for star/fork */
 @keyframes celebrate {
     0% { transform: scale(1); }
     25% { transform: scale(1.2); }
@@ -222,28 +227,36 @@ body {
     animation: celebrate 0.5s ease;
 }
 
-/* Tooltip for promo buttons */
-.promo-btn .tooltip {
-    position: absolute;
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-    padding: 0.3rem 0.8rem;
-    border-radius: 6px;
-    font-size: 0.65rem;
-    white-space: nowrap;
+/* Demo Banner */
+.demo-banner {
+    background: linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(46, 160, 67, 0.1));
     border: 1px solid var(--border-color);
-    opacity: 0;
-    pointer-events: none;
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     transition: var(--transition);
-    box-shadow: var(--shadow);
 }
 
-.promo-btn:hover .tooltip {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-4px);
+.demo-banner:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.demo-tag {
+    background: var(--accent-green);
+    color: #fff;
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 /* Main Card */
@@ -703,6 +716,54 @@ body {
 .license-note a { color: var(--accent); text-decoration: none; }
 .license-note a:hover { text-decoration: underline; }
 
+/* Made with Love Footer */
+.made-with-love {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.made-with-love a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.made-with-love a:hover {
+    text-decoration: underline;
+}
+
+.social-links-mini {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links-mini a {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.social-links-mini a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.version-badge {
+    background: var(--bg-card);
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
 .loading-spinner {
     display: inline-block;
     width: 20px;
@@ -775,6 +836,7 @@ body {
 /* Responsive */
 @media (max-width: 1024px) {
     .charts-row { grid-template-columns: 1fr 1fr; }
+    .promo-btn .promo-label { display: none; }
 }
 @media (max-width: 768px) {
     .charts-row { grid-template-columns: 1fr; }
@@ -784,10 +846,15 @@ body {
     .card { padding: 1.5rem; }
     .top-bar { flex-direction: column; align-items: stretch; }
     .top-bar .actions { justify-content: center; }
+    .promo-btn { padding: 0.3rem 0.6rem 0.3rem 0.4rem; }
+    .promo-btn .promo-icon { width: 24px; height: 24px; font-size: 0.9rem; }
+    .promo-btn .promo-text { font-size: 0.65rem; }
+    .made-with-love { flex-direction: column; text-align: center; }
 }
 @media (max-width: 480px) {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .search-section { flex-direction: column; }
     .search-section button { width: 100%; justify-content: center; }
     .repo-grid { grid-template-columns: 1fr; }
+    .demo-banner { font-size: 0.8rem; }
 }
