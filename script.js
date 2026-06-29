@@ -1,4 +1,5 @@
-// script.js - Complete functionality
+// script.js - Complete functionality, 
+// profile-generator update
 
 (function() {
     'use strict';
