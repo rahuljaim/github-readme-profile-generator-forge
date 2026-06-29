@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Profile Forge · Ultimate Edition</title>
+    <title>GitHub Profile Forge · Premium Developer Dashboard</title>
+    
+    <!-- Open Graph / Social Sharing Meta Tags -->
+    <meta property="og:title" content="GitHub Profile Forge · Premium Developer Dashboard" />
+    <meta property="og:description" content="Create stunning GitHub profile dashboards with real-time analytics, interactive charts, and export capabilities. Live stats, language distribution, contribution heatmap & more!" />
+    <meta property="og:image" content="https://rahuljaim.github.io/github-readme-profile-generator-forge/og-image.png" />
+    <meta property="og:url" content="https://rahuljaim.github.io/github-readme-profile-generator-forge" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="GitHub Profile Forge" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GitHub Profile Forge · Premium Developer Dashboard" />
+    <meta name="twitter:description" content="Create stunning GitHub profile dashboards with real-time analytics, interactive charts, and export capabilities." />
+    <meta name="twitter:image" content="https://rahuljaim.github.io/github-readme-profile-generator-forge/og-image.png" />
+    
+    <!-- Additional SEO -->
+    <meta name="description" content="GitHub Profile Forge - Premium GitHub profile dashboard with real-time analytics, interactive charts, export capabilities, and social sharing. Apache 2.0 licensed." />
+    <meta name="keywords" content="github, profile, dashboard, analytics, statistics, visualization, developer, open-source" />
+    <link rel="canonical" href="https://rahuljaim.github.io/github-readme-profile-generator-forge" />
+    
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Google Font (Inter) -->
@@ -21,8 +41,35 @@
     <div class="container">
         <!-- Top Bar -->
         <div class="top-bar">
-            <span class="brand"><i class="fas fa-code" style="color:var(--accent);"></i> Profile Forge</span>
-            <div class="actions">
+            <div class="brand">
+                <i class="fas fa-code" style="color:var(--accent);"></i> Profile Forge
+                <span style="font-size:0.6rem; opacity:0.6; display:inline-block; margin-left:0.5rem;">v3.1.0</span>
+            </div>
+            <div class="actions" style="position:relative;">
+                <!-- Animated Star Button -->
+                <button class="promo-btn" id="starPromoBtn" onclick="window.open('https://github.com/rahuljaim/github-readme-profile-generator-forge', '_blank')">
+                    <span class="promo-icon">
+                        <i class="fas fa-star fa-beat-fade" style="--fa-beat-fade-opacity: 0.6; --fa-beat-fade-scale: 0.8; color: #f1c40f;"></i>
+                    </span>
+                    <span class="promo-text">
+                        <span class="promo-count" id="starCount">🌟 0</span>
+                        <span class="promo-label">Star</span>
+                    </span>
+                    <span class="tooltip">Star this repo ⭐</span>
+                </button>
+                
+                <!-- Animated Fork Button -->
+                <button class="promo-btn" id="forkPromoBtn" onclick="window.open('https://github.com/rahuljaim/github-readme-profile-generator-forge/fork', '_blank')">
+                    <span class="promo-icon">
+                        <i class="fas fa-code-fork fa-beat-fade" style="--fa-beat-fade-opacity: 0.6; --fa-beat-fade-scale: 0.8; color: #58a6ff;"></i>
+                    </span>
+                    <span class="promo-text">
+                        <span class="promo-count" id="forkCount">🍴 0</span>
+                        <span class="promo-label">Fork</span>
+                    </span>
+                    <span class="tooltip">Fork this repo 🍴</span>
+                </button>
+                
                 <button id="themeToggle"><i class="fas fa-moon"></i> <span>Dark</span></button>
                 <button id="exportMarkdownBtn"><i class="fas fa-file-alt"></i> Markdown</button>
                 <button id="exportPNGBtn"><i class="fas fa-image"></i> PNG</button>
@@ -30,11 +77,18 @@
             </div>
         </div>
 
+        <!-- Live Demo Banner -->
+        <div class="demo-banner">
+            <i class="fas fa-rocket" style="color: #f1c40f;"></i>
+            <span><strong>Live Demo:</strong> Try it now by entering any GitHub username below!</span>
+            <span class="demo-tag">🔥 Popular</span>
+        </div>
+
         <!-- Main Card -->
         <div class="card" id="dashboardCard">
             <!-- Search -->
             <div class="search-section">
-                <input type="text" id="usernameInput" placeholder="Enter GitHub username..." value="octocat">
+                <input type="text" id="usernameInput" placeholder="Enter GitHub username..." value="rahuljaim">
                 <button id="fetchBtn"><i class="fas fa-rocket"></i> Generate Dashboard</button>
             </div>
 
@@ -174,11 +228,23 @@
 
             <div class="license-note">
                 <i class="fas fa-lock" style="margin-right:6px; opacity:0.6;"></i>
-                Licensed under <a href="#">Apache License 2.0</a> ·
-                <a href="#">Contributor Covenant Code of Conduct</a> ·
+                Licensed under <a href="https://github.com/rahuljaim/github-readme-profile-generator-forge/blob/main/LICENSE" target="_blank">Apache License 2.0</a> ·
+                <a href="https://github.com/rahuljaim/github-readme-profile-generator-forge/blob/main/CODE_OF_CONDUCT.md" target="_blank">Contributor Covenant Code of Conduct</a> ·
                 <i class="fas fa-users" style="margin-left:8px; opacity:0.6;"></i>
-                <a href="#">We welcome contributors</a> ·
+                <a href="https://github.com/rahuljaim/github-readme-profile-generator-forge/blob/main/CONTRIBUTING.md" target="_blank">We welcome contributors</a> ·
                 <span style="opacity:0.6;">v3.1.0</span>
+            </div>
+            
+            <!-- Made with Love Footer -->
+            <div class="made-with-love">
+                <span>Made with ❤️ by <a href="https://github.com/rahuljaim" target="_blank">Rahul Jain</a></span>
+                <span class="version-badge">v3.1.0</span>
+                <div class="social-links-mini">
+                    <a href="https://rahuljain.dev" target="_blank" title="RahulJain.dev"><i class="fab fa-web"></i></a>
+                    <a href="https://www.linkedin.com/in/rahuljain-dev/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://medium.com/@rahuljain-dev" target="_blank" title="Medium"><i class="fab fa-medium-m"></i></a>
+                    <a href="https://github.com/rahuljaim" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                </div>
             </div>
         </div>
     </div>
@@ -193,6 +259,7 @@
                 <button style="background:#0a66c2;" onclick="shareOn('linkedin')"><i class="fab fa-linkedin-in"></i> LinkedIn</button>
                 <button style="background:#25d366;" onclick="shareOn('whatsapp')"><i class="fab fa-whatsapp"></i> WhatsApp</button>
                 <button style="background:#ff4500;" onclick="shareOn('reddit')"><i class="fab fa-reddit-alien"></i> Reddit</button>
+                <button style="background:#6c5ce7;" onclick="copyShareLink()"><i class="fas fa-copy"></i> Copy Link</button>
             </div>
             <button class="close-modal" id="closeModal">Close</button>
         </div>
