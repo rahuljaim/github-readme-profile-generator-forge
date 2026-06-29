@@ -1,4 +1,5 @@
-// script.js - Complete functionality with your URLs
+// script.js - Complete functionality, 
+// profile-generator update
 
 (function() {
     'use strict';
