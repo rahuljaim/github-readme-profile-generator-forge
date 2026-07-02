@@ -565,9 +565,9 @@ ${user.blog ? `- **Blog/Website:** [${user.blog}](${user.blog})` : ''}
 
 <div align="center">
 
-![${user.login}'s GitHub stats](https://github-readme-stats.vercel.app/api?username=${user.login}&show_icons=true&theme=radical&hide_border=true&count_private=true)
+![${user.login}'s GitHub stats](https://github-stats-extended.vercel.app/api?username=${user.login}&show_icons=true&theme=radical&hide_border=true&count_private=true)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=${user.login}&layout=compact&theme=radical&hide_border=true)
+![Top Languages](https://github-stats-extended.vercel.app/api/top-langs/?username=${user.login}&layout=compact&theme=radical&hide_border=true)
 
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=${user.login}&theme=radical&hide_border=true)](https://git.io/streak-stats)
 
